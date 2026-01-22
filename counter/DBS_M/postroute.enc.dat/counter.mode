@@ -1,0 +1,99 @@
+catch { setAnalysisMode -analysisType onChipVariation }
+catch { setAnalysisMode -checkType setup }
+catch { setAnalysisMode -clkSrcPath true }
+catch { setAnalysisMode -clockPropagation sdcControl }
+catch { setAnalysisMode -cppr both }
+catch { setAnalysisMode -skew true }
+catch { setAnalysisMode -usefulSkew true }
+catch { setOptMode -deleteInst true }
+catch { setOptMode -drcMargin 0 }
+catch { setOptMode -fixDrc true }
+catch { setOptMode -optimizeFF true }
+catch { setOptMode -placementSetupViews { fast_view  } }
+catch { setOptMode -setupTargetSlack 0 }
+catch { setPathGroupOptions default -effortLevel low }
+catch { setPathGroupOptions tdgp_reg2reg_default -effortLevel high }
+catch { setPathGroupOptions reg2reg -effortLevel high -weight 2 }
+catch { setPathGroupOptions reg2cgate -effortLevel high -weight 1 }
+catch { setExtractRCMode  -effortLevel medium -engine postRoute -total_c_th 5 -relative_c_th 0.03 -coupling_c_th 3 }
+catch {setNanoRouteMode -quiet -extractThirdPartyCompatible false}
+catch {setNanoRouteMode -quiet -grouteExpTdStdDelay 52.700000}
+catch {setNanoRouteMode -quiet -grouteExpTdUseTifTimingEngineForImportDesign false}
+
+catch { setPlaceMode -autoEnableFGCUnder10nm false }
+catch { setPlaceMode -autoEnableFGCUnder16nm false }
+catch { setPlaceMode -clusterFix true }
+catch { setPlaceMode -exp_gigaplace_padding_adjustments_for_adv_nodes true }
+catch { setPlaceMode -expAdvPinAccess false }
+catch { setPlaceMode -expAutoPinAccessLayer false }
+catch { setPlaceMode -expPaddingMinPadRatio 1.1 }
+catch { setPlaceMode -expTrimOptBeforeTDGP false }
+catch { setPlaceMode -ignoreLowEffortPathGroups false }
+catch { setPlaceMode -IOSlackAdjust false }
+catch { setPlaceMode -ipReuseSKPTG true }
+catch { setPlaceMode -ipTimingEffortLow false }
+catch { setPlaceMode -NMPfixAreaCalcBug 1 }
+catch { setPlaceMode -place_detail_color_aware_legal false }
+catch { setPlaceMode -place_detail_drc_check_short_only true }
+catch { setPlaceMode -place_global_exp_adjust_low_bound -8 }
+catch { setPlaceMode -place_global_exp_skp_adjust_scale_mode 2 }
+catch { setPlaceMode -place_global_exp_skp_adjust_scale_start_iteration 0 }
+catch { setPlaceMode -place_global_exp_skp_adjust_scale_threshold_down -80 }
+catch { setPlaceMode -place_global_exp_skp_adjust_scale_threshold_up 0 }
+catch { setPlaceMode -resetCombineRFLevel 1000 }
+catch { setPlaceMode -RTCSpread false }
+catch { setPlaceMode -tdgp0DelayModeFix true }
+catch { setPlaceMode -tdgp_all_view_vsm false }
+catch { setPlaceMode -tdgp_basic_pg true }
+catch { setPlaceMode -tdgp_repeat_start_level 0 }
+catch { setPlaceMode -tdgpForceSimplified true }
+catch { setPlaceMode -tdgpInitIgnoreNetLoad false }
+catch { setPlaceMode -tdgpPack true }
+catch { setPlaceMode -tdgpPackEndPoints true }
+catch { setPlaceMode -tdgpParallelArcMergeFix true }
+catch { setPlaceMode -tdgpRealSlackByFastProp true }
+catch { setPlaceMode -tdgpRestartFromSensPrecond false }
+catch { setPlaceMode -tdgpScaleUp 31 }
+catch { setPlaceMode -tdgpSetEndPtSlew false }
+catch { setPlaceMode -tdgpShiftMode 2 }
+catch { setPlaceMode -tdgpSinglePinFixedNetWeight 1.5 }
+catch { setPlaceMode -tdgpSlackKeepTop 0 }
+catch { setPlaceMode -tdgpSlackMarginCTEAdjust true }
+catch { setPlaceMode -tdgpSlackMarginKeepPositiveSoftPhaseSlack true }
+catch { setPlaceMode -tdgpSlackMarginMode 1 }
+catch { setPlaceMode -tdgpSlackMarginPercentage 1 }
+catch { setPlaceMode -tdgpSlackMarginPreserve false }
+catch { setPlaceMode -tdgpSlackMarginScaleAdjustPower 0.5 }
+catch { setPlaceMode -tdgpViewPruning true }
+catch { setPlaceMode -timingDriven true }
+catch { setPlaceMode -trimView allViews }
+catch { setPlaceMode -usePreconditioning true }
+catch { setPlaceMode -VHFThreshold 2147483647 }
+catch { setIlmMode -keepHighFanoutPorts true -keepLoopBack false -keepInstInSdc false -keepFlatten true }
+catch { setSrouteMode -viaConnectToShape noshape }
+catch { setDelayCalMode -enable_high_fanout true }
+catch { setDelayCalMode -engine aae }
+catch { setDelayCalMode -ignoreNetLoad false }
+catch { setDelayCalMode -SIAware true }
+catch { setDelayCalMode -socv_accuracy_mode low }
+catch { setAddRingMode -avoid_short false }
+catch { setAddRingMode -extend_over_row false }
+catch { setAddRingMode -ignore_rows false }
+catch { setAddRingMode -orthogonal_only true }
+catch { setAddRingMode -ring_target default }
+catch { setAddRingMode -skip_crossing_trunks none }
+catch { setAddRingMode -skip_via_on_pin standardcell }
+catch { setAddRingMode -skip_via_on_wire_shape noshape }
+catch { setAddRingMode -stacked_via_bottom_layer Metal1 }
+catch { setAddRingMode -stacked_via_top_layer Metal6 }
+catch { setAddRingMode -via_using_exact_crossover_size true }
+catch { setImportMode -discardFloatingVNets false }
+catch { setImportMode -keepEmptyModule true }
+catch { setSIMode -separate_delta_delay_on_data true }
+catch { setRouteMode -earlyGlobalRouteSecondPG false }
+catch { setEndCapMode -leftEdge FILL16 }
+catch { setEndCapMode -rightEdge FILL16 }
+catch { setFPlanMode -defaultTechSite tsm3site }
+catch { setFPlanMode -maxIoHeight false }
+catch { setFPlanMode -place_check_ignore_fixed_cell_list {} }
+catch { setFPlanMode -powerRailLayer {} }

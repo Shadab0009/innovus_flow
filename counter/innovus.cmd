@@ -1,7 +1,7 @@
 #######################################################
 #                                                     
 #  Innovus Command Logging File                     
-#  Created on Tue Jan 20 17:37:13 2026                
+#  Created on Thu Jan 22 16:46:49 2026                
 #                                                     
 #######################################################
 
@@ -737,5 +737,224 @@ set_global _enable_mmmc_by_default_flow      $CTE::mmmc_default
 suppressMessage ENCEXT-2799
 getVersion
 win
-is_common_ui_mode
-restoreDesign /home/shadab/shadab/innovus_flow/ALU/DBS_M/postcts.enc.dat simple_alu
+save_global counter.globals
+set init_gnd_net VSS
+set init_lef_file ../../libs/lefs/all.lef
+set init_verilog syn_opt_counter.v.gz
+set init_mmmc_file mmmc.tcl
+set init_pwr_net VDD
+init_design
+save_global counter.globals
+set init_gnd_net VSS
+set init_lef_file ../../libs/lefs/all.lef
+set init_verilog syn_opt_counter.v.gz
+set init_mmmc_file Default.view
+set init_pwr_net VDD
+init_design
+check_design -type all
+check_design -type place
+checkDesign
+checkDesign -all
+check_timing 
+check_timing -verbose 
+check_timing -verbose -view fast_view
+report_timing
+floorPlan -site {corner pad tsm3site} -r 1 0.7 10 10 10 10
+floorPlan -site tsm3site -r 1 0.7 10 10 10 10
+fit
+setDrawView fplan
+editPin -layer 3 -pin * -spreadType side -spacing 1.0 -unit MICRON -side {Top Bottom Left Right}
+checkPinAssignment
+legalizePin
+checkPinAssignment
+setDrawView place
+setDrawView fplan
+setEndCapMode -leftEdge FILL16 -rightEdge FILL16
+addEndCap -prefix ENDCAP
+addWellTap -cell TIEHI -cellInterval 30 -prefix WELLTAP
+globalNetConnect VDD -type pgpin -pin VDD -inst *
+globalNetConnect VSS -type pgpin -pin VSS -inst *
+globalNetConnect VDD -type tiehi -inst *
+globalNetConnect VSS -type tielo -inst *
+set sprCreateIeRingOffset 1.0
+set sprCreateIeRingThreshold 1.0
+set sprCreateIeRingJogDistance 1.0
+set sprCreateIeRingLayers {}
+set sprCreateIeRingOffset 1.0
+set sprCreateIeRingThreshold 1.0
+set sprCreateIeRingJogDistance 1.0
+set sprCreateIeRingLayers {}
+set sprCreateIeStripeWidth 10.0
+set sprCreateIeStripeThreshold 1.0
+set sprCreateIeStripeWidth 10.0
+set sprCreateIeStripeThreshold 1.0
+set sprCreateIeRingOffset 1.0
+set sprCreateIeRingThreshold 1.0
+set sprCreateIeRingJogDistance 1.0
+set sprCreateIeRingLayers {}
+set sprCreateIeStripeWidth 10.0
+set sprCreateIeStripeThreshold 1.0
+setAddRingMode -ring_target default -extend_over_row 0 -ignore_rows 0 -avoid_short 0 -skip_crossing_trunks none -stacked_via_top_layer Metal6 -stacked_via_bottom_layer Metal1 -via_using_exact_crossover_size 1 -orthogonal_only true -skip_via_on_pin {  standardcell } -skip_via_on_wire_shape {  noshape }
+addRing -nets {VDD VSS} -type core_rings -follow core -layer {top Metal5 bottom Metal5 left Metal6 right Metal6} -width {top 1.8 bottom 1.8 left 1.8 right 1.8} -spacing {top 0.28 bottom 0.28 left 0.46 right 0.46} -offset {top 1.8 bottom 1.8 left 1.8 right 1.8} -center 1 -threshold 0 -jog_distance 0 -snap_wire_center_to_grid None
+setAddRingMode -ring_target default -extend_over_row 0 -ignore_rows 0 -avoid_short 0 -skip_crossing_trunks none -stacked_via_top_layer Metal6 -stacked_via_bottom_layer Metal1 -via_using_exact_crossover_size 1 -orthogonal_only true -skip_via_on_pin {  standardcell } -skip_via_on_wire_shape {  noshape }
+addRing -nets {VDD VSS} -type core_rings -follow core -layer {top Metal5 bottom Metal5 left Metal6 right Metal6} -width {top 1.8 bottom 1.8 left 1.8 right 1.8} -spacing {top 0.28 bottom 0.28 left 0.46 right 0.46} -offset {top 1.8 bottom 1.8 left 1.8 right 1.8} -center 1 -threshold 0 -jog_distance 0 -snap_wire_center_to_grid None
+setSrouteMode -viaConnectToShape { noshape }
+sroute -connect { blockPin padPin padRing corePin floatingStripe } -layerChangeRange { Metal1(1) Metal6(6) } -blockPinTarget { nearestTarget } -padPinPortConnect { allPort oneGeom } -padPinTarget { nearestTarget } -corePinTarget { firstAfterRowEnd } -floatingStripeTarget { blockring padring ring stripe ringpin blockpin followpin } -allowJogging 1 -crossoverViaLayerRange { Metal1(1) Metal6(6) } -nets { VDD VSS } -allowLayerChange 1 -blockPin useLef -targetViaLayerRange { Metal1(1) Metal6(6) }
+saveDesign counter_power
+checkFPlan
+place_opt_design
+deleteAllPowerPreroutes
+deleteEmptyModule
+deleteInst {ENDCAP_1 ENDCAP_2 ENDCAP_3 ENDCAP_4 ENDCAP_5 ENDCAP_6 ENDCAP_7 ENDCAP_8 ENDCAP_9 ENDCAP_10 ENDCAP_11 ENDCAP_12}
+deleteTieHiLo -cell TIEHI
+floorPlan -site tsm3site -r 1 0.7 5 5 5 5
+fit
+checkPinAssignment
+legalizePin
+checkPinAssignment
+fit
+setEndCapMode -leftEdge FILL16 -rightEdge FILL16
+addEndCap -prefix ENDCAP
+addWellTap -cell TIEHI -cellInterval 30 -prefix WELLTAP
+deleteTieHiLo -cell TIEHI
+deleteInst {ENDCAP_1 ENDCAP_2 ENDCAP_3 ENDCAP_4 ENDCAP_5 ENDCAP_6 ENDCAP_7 ENDCAP_8 ENDCAP_9 ENDCAP_10 ENDCAP_11 ENDCAP_12}
+getIoFlowFlag
+setIoFlowFlag 0
+floorPlan -site tsm3site -s 50 40 5.28 5.04 5.28 5.04
+uiSetTool select
+getIoFlowFlag
+fit
+setIoFlowFlag 0
+floorPlan -site tsm3site -s 50.16 39.76 5.28 5.04 5.28 5.04
+uiSetTool select
+getIoFlowFlag
+fit
+checkPinAssignment
+legalizePin
+checkPinAssignment
+setEndCapMode -leftEdge FILL16 -rightEdge FILL16
+addEndCap -prefix ENDCAP
+addWellTap -cell TIEHI -cellInterval 30 -prefix WELLTAP
+globalNetConnect VDD -type pgpin -pin VDD -inst *
+globalNetConnect VSS -type pgpin -pin VSS -inst *
+globalNetConnect VDD -type tiehi -inst *
+globalNetConnect VSS -type tielo -inst *
+setAddRingMode -ring_target default -extend_over_row 0 -ignore_rows 0 -avoid_short 0 -skip_crossing_trunks none -stacked_via_top_layer Metal6 -stacked_via_bottom_layer Metal1 -via_using_exact_crossover_size 1 -orthogonal_only true -skip_via_on_pin {  standardcell } -skip_via_on_wire_shape {  noshape }
+addRing -nets {VDD VSS} -type core_rings -follow core -layer {top Metal5 bottom Metal5 left Metal6 right Metal6} -width {top 1.8 bottom 1.8 left 1.8 right 1.8} -spacing {top 0.28 bottom 0.28 left 0.46 right 0.46} -offset {top 1.8 bottom 1.8 left 1.8 right 1.8} -center 1 -threshold 0 -jog_distance 0 -snap_wire_center_to_grid None
+setAddRingMode -ring_target default -extend_over_row 0 -ignore_rows 0 -avoid_short 0 -skip_crossing_trunks none -stacked_via_top_layer Metal6 -stacked_via_bottom_layer Metal1 -via_using_exact_crossover_size 1 -orthogonal_only true -skip_via_on_pin {  standardcell } -skip_via_on_wire_shape {  noshape }
+addRing -nets {VDD VSS} -type core_rings -follow core -layer {top Metal5 bottom Metal5 left Metal6 right Metal6} -width {top 0.8 bottom 0.8 left 0.8 right 0.8} -spacing {top 0.28 bottom 0.28 left 0.46 right 0.46} -offset {top 1.8 bottom 1.8 left 1.8 right 1.8} -center 1 -threshold 0 -jog_distance 0 -snap_wire_center_to_grid None
+setAddRingMode -ring_target default -extend_over_row 0 -ignore_rows 0 -avoid_short 0 -skip_crossing_trunks none -stacked_via_top_layer Metal6 -stacked_via_bottom_layer Metal1 -via_using_exact_crossover_size 1 -orthogonal_only true -skip_via_on_pin {  standardcell } -skip_via_on_wire_shape {  noshape }
+addRing -nets {VDD VSS} -type core_rings -follow core -layer {top Metal5 bottom Metal5 left Metal6 right Metal6} -width {top 0.8 bottom 0.8 left 0.8 right 0.8} -spacing {top 0.28 bottom 0.28 left 0.46 right 0.46} -offset {top 1.8 bottom 1.8 left 1.8 right 1.8} -center 1 -threshold 0 -jog_distance 0 -snap_wire_center_to_grid None
+deleteAllPowerPreroutes
+deleteTieHiLo -cell TIEHI
+deleteInst {ENDCAP_1 ENDCAP_2 ENDCAP_3 ENDCAP_4 ENDCAP_5 ENDCAP_6 ENDCAP_7 ENDCAP_8 ENDCAP_9 ENDCAP_10 ENDCAP_11 ENDCAP_12 ENDCAP_13 ENDCAP_14}
+checkPinAssignment
+setAddRingMode -ring_target default -extend_over_row 0 -ignore_rows 0 -avoid_short 0 -skip_crossing_trunks none -stacked_via_top_layer Metal6 -stacked_via_bottom_layer Metal1 -via_using_exact_crossover_size 1 -orthogonal_only true -skip_via_on_pin {  standardcell } -skip_via_on_wire_shape {  noshape }
+addRing -nets {VDD VSS} -type core_rings -follow core -layer {top Metal5 bottom Metal5 left Metal6 right Metal6} -width {top 0.8 bottom 0.8 left 0.8 right 0.8} -spacing {top 0.28 bottom 0.28 left 0.46 right 0.46} -offset {top 1.8 bottom 1.8 left 1.8 right 1.8} -center 1 -threshold 0 -jog_distance 0 -snap_wire_center_to_grid None
+setAddRingMode -ring_target default -extend_over_row 0 -ignore_rows 0 -avoid_short 0 -skip_crossing_trunks none -stacked_via_top_layer Metal6 -stacked_via_bottom_layer Metal1 -via_using_exact_crossover_size 1 -orthogonal_only true -skip_via_on_pin {  standardcell } -skip_via_on_wire_shape {  noshape }
+addRing -nets {VDD VSS} -type core_rings -follow core -layer {top Metal5 bottom Metal5 left Metal6 right Metal6} -width {top 0.8 bottom 0.8 left 0.8 right 0.8} -spacing {top 0.28 bottom 0.28 left 0.46 right 0.46} -offset {top 1.8 bottom 1.8 left 1.8 right 1.8} -center 1 -threshold 0 -jog_distance 0 -snap_wire_center_to_grid None
+deleteAllPowerPreroutes
+floorPlan -site tsm3site -r 1 0.7 10 10 10 10
+checkPinAssignment
+legalizePin
+setDrawView place
+setDrawView fplan
+zoomBox -0.61650 51.18750 3.35800 48.94100
+fit
+setAddRingMode -ring_target default -extend_over_row 0 -ignore_rows 0 -avoid_short 0 -skip_crossing_trunks none -stacked_via_top_layer Metal6 -stacked_via_bottom_layer Metal1 -via_using_exact_crossover_size 1 -orthogonal_only true -skip_via_on_pin {  standardcell } -skip_via_on_wire_shape {  noshape }
+addRing -nets {VDD VSS} -type core_rings -follow core -layer {top Metal5 bottom Metal5 left Metal6 right Metal6} -width {top 1.8 bottom 1.8 left 1.8 right 1.8} -spacing {top 0.46 bottom 0.46 left 0.46 right 0.46} -offset {top 1.8 bottom 1.8 left 1.8 right 1.8} -center 1 -threshold 0 -jog_distance 0 -snap_wire_center_to_grid None
+setAddRingMode -ring_target default -extend_over_row 0 -ignore_rows 0 -avoid_short 0 -skip_crossing_trunks none -stacked_via_top_layer Metal6 -stacked_via_bottom_layer Metal1 -via_using_exact_crossover_size 1 -orthogonal_only true -skip_via_on_pin {  standardcell } -skip_via_on_wire_shape {  noshape }
+addRing -nets {VDD VSS} -type core_rings -follow core -layer {top Metal5 bottom Metal5 left Metal6 right Metal6} -width {top 1.8 bottom 1.8 left 1.8 right 1.8} -spacing {top 0.46 bottom 0.46 left 0.46 right 0.46} -offset {top 1.8 bottom 1.8 left 1.8 right 1.8} -center 1 -threshold 0 -jog_distance 0 -snap_wire_center_to_grid None
+setSrouteMode -viaConnectToShape { noshape }
+sroute -connect { blockPin padPin padRing corePin floatingStripe } -layerChangeRange { Metal1(1) Metal6(6) } -blockPinTarget { nearestTarget } -padPinPortConnect { allPort oneGeom } -padPinTarget { nearestTarget } -corePinTarget { firstAfterRowEnd } -floatingStripeTarget { blockring padring ring stripe ringpin blockpin followpin } -allowJogging 1 -crossoverViaLayerRange { Metal1(1) Metal6(6) } -nets { VDD VSS } -allowLayerChange 1 -blockPin useLef -targetViaLayerRange { Metal1(1) Metal6(6) }
+place_opt_design
+setDrawView place
+zoomBox 3.56100 3.10500 52.86800 47.24550
+zoomBox 6.16350 6.40600 48.07450 43.92550
+zoomBox 8.37550 9.21200 44.00000 41.10350
+zoomBox 11.85400 13.62400 37.59250 36.66550
+zoomBox 8.37500 9.21150 44.00000 41.10350
+fit
+add_ndr -width {Metal1 0.12 Metal2 0.14 Metal3 0.14 Metal4 0.14 Metal5 0.14 Metal6 0.14 } -spacing {Metal1 0.12 Metal2 0.14 Metal3 0.14 Metal4 0.14 Metal5 0.14 Metal6 0.14 } -name 2w2s
+create_route_type -name clkroute -non_default_rule 2w2s -bottom_preferred_layer Metal4 -top_preferred_layer Metal5
+set_ccopt_property route_type clkroute -net_type trunk
+set_ccopt_property route_type clkroute -net_type leaf
+set_ccopt_property buffer_cells {CLKBUFX8 CLKBUFX12}
+set_ccopt_property inverter_cells {CLKINVX8 CLKINVX12}
+set_ccopt_property clock_gating_cells TLATNTSCA*
+create_ccopt_clock_tree_spec -file ccopt.spec
+get_ccopt_clock_trees
+ccopt_check_and_flatten_ilms_no_restore
+set_ccopt_property cts_is_sdc_clock_root -pin clk true
+create_ccopt_clock_tree -name clk -source clk -no_skew_group
+set_ccopt_property clock_period -pin clk 2
+set_ccopt_property timing_connectivity_info {}
+create_ccopt_skew_group -name clk/constraints_fast -sources clk -auto_sinks
+set_ccopt_property include_source_latency -skew_group clk/constraints_fast true
+set_ccopt_property extracted_from_clock_name -skew_group clk/constraints_fast clk
+set_ccopt_property extracted_from_constraint_mode_name -skew_group clk/constraints_fast constraints_fast
+set_ccopt_property extracted_from_delay_corners -skew_group clk/constraints_fast dalay_corner_fast
+create_ccopt_skew_group -name clk/constraints_slow -sources clk -auto_sinks
+set_ccopt_property include_source_latency -skew_group clk/constraints_slow true
+set_ccopt_property extracted_from_clock_name -skew_group clk/constraints_slow clk
+set_ccopt_property extracted_from_constraint_mode_name -skew_group clk/constraints_slow constraints_slow
+set_ccopt_property extracted_from_delay_corners -skew_group clk/constraints_slow delay_corner_slow
+create_ccopt_skew_group -name clk/constraints_typ -sources clk -auto_sinks
+set_ccopt_property include_source_latency -skew_group clk/constraints_typ true
+set_ccopt_property extracted_from_clock_name -skew_group clk/constraints_typ clk
+set_ccopt_property extracted_from_constraint_mode_name -skew_group clk/constraints_typ constraints_typ
+set_ccopt_property extracted_from_delay_corners -skew_group clk/constraints_typ delay_corner_tpy
+check_ccopt_clock_tree_convergence
+get_ccopt_property auto_design_state_for_ilms
+setAnalysisMode -analysisType onChipVariation -cppr both
+timeDesign -postCTS
+timeDesign -postCTS -hold
+report_timing
+report_timing -early 
+report_timing -late 
+saveDesign DBS_M/postcts.enc
+rcOut -spef counter_cts.spef -rc_corner rc_corner
+rcOut -spef counter_cts.spef
+routeDesign
+check_timing 
+check_timing -verbose 
+saveDesign DBS_M/route.enc
+setExtractRCMode -engine postRoute
+setExtractRCMode -effortLevel medium
+timeDesign -postRoute
+timeDesign -postRoute -hold
+optDesign -postRoute -setup -hold
+saveDesign DBS_M/postroute.enc
+verifyConnectivity -type all -report counter.conn.rpt
+verifyProcessAntenna -report counter.antenna.rpt
+rcOut -spef counter_final.spef
+rcOut -spef counter_final.spef -rc_corner rc_worst
+saveNetlist counter_postRoute_physical.v
+write_lef_abstract counter.lef
+defOut counter_post_route.def
+report_timing
+report_timing
+report_noise
+zoomBox 4.66400 3.96300 53.97050 48.10300
+zoomBox 7.69700 7.59900 49.60750 45.11800
+zoomBox 12.46650 13.31600 42.74700 40.42350
+zoomBox 14.32900 15.54850 40.06750 38.59000
+zoomBox 15.91200 17.44600 37.79000 37.03150
+zoomBox 14.33850 15.54300 40.07750 38.58500
+zoomBox 12.48700 13.30400 42.76850 40.41250
+zoomBox 10.30900 10.67000 45.93450 42.56250
+zoomBox 4.73300 3.92550 54.04200 48.06750
+zoomBox -7.89250 -11.34550 72.39900 60.53250
+fit
+zoomBox -3.02950 4.94550 3.13750 1.31000
+fit
+zoomBox 61.62850 4.23150 63.77100 1.95950
+fit
+zoomBox 60.78500 48.57050 65.00450 46.29850
+fit
+gui_select -rect {2.35850 51.55650 6.57800 49.93400}
+zoomBox 2.35850 51.49200 6.77300 49.09000
+deselectAll
+fit
+selectWire 3.4900 35.9800 3.7700 50.2600 2 clk
+deselectAll

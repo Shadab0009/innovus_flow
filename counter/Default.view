@@ -1,0 +1,19 @@
+# Version:1.0 MMMC View Definition File
+# Do Not Remove Above Line
+create_rc_corner -name rc_corner -cap_table {../../libs/captable/t018s6mlv.capTbl} -preRoute_res {1.0} -preRoute_cap {1.0} -preRoute_clkres {0.0} -preRoute_clkcap {0.0} -postRoute_res {1.0} -postRoute_cap {1.0} -postRoute_xcap {1.0} -postRoute_clkres {0.0} -postRoute_clkcap {0.0}
+create_op_cond -name op_cond_fast -library_file {../../libs/libs/fast.lib} -P {1} -V {1.32} -T {0}
+create_op_cond -name op_cond_slow -library_file {../../libs/libs/slow.lib} -P {1} -V {1.08} -T {125}
+create_op_cond -name op_cond_typ -library_file {../../libs/libs/typical.lib} -P {1} -V {1.2} -T {25}
+create_library_set -name slow_lib -timing {../../libs/libs/slow.lib}
+create_library_set -name fast_lib -timing {../../libs/libs/fast.lib}
+create_library_set -name typ_lib -timing {../../libs/libs/typical.lib}
+create_constraint_mode -name constraints_fast -sdc_files {syn_opt_counter.functional_wcl_fast.sdc}
+create_constraint_mode -name constraints_slow -sdc_files {syn_opt_counter.functional_wcl_slow.sdc}
+create_constraint_mode -name constraints_typ -sdc_files {syn_opt_counter.functional_wcl_typical.sdc}
+create_delay_corner -name delay_corner_slow -early_library_set {fast_lib} -late_library_set {slow_lib} -early_opcond {op_cond_fast} -late_opcond {op_cond_slow}
+create_delay_corner -name dalay_corner_fast -early_library_set {slow_lib} -late_library_set {fast_lib} -early_opcond {op_cond_slow} -late_opcond {op_cond_fast}
+create_delay_corner -name delay_corner_tpy -early_library_set {typ_lib} -late_library_set {typ_lib} -early_opcond {op_cond_tpy} -late_opcond {op_cond_typ}
+create_analysis_view -name fast_view -constraint_mode {constraints_fast} -delay_corner {dalay_corner_fast}
+create_analysis_view -name slow_view -constraint_mode {constraints_slow} -delay_corner {delay_corner_slow}
+create_analysis_view -name typ_view -constraint_mode {constraints_typ} -delay_corner {delay_corner_tpy}
+set_analysis_view -setup {fast_view slow_view typ_view} -hold {fast_view slow_view typ_view}
